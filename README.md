@@ -51,7 +51,7 @@ After pulling out the white module and rearranging things a bit, we can see that
 
 Red and black wires leave the module on the output side and supply power to the duplex outlet.
 
-The black cable from the USB connector contains four wires. The red wire doesn't to anywhere; it is terminated in a DuPont connector and is left loose in the box. The other three wires (white, black, and green) to into the module.
+The black cable from the USB connector contains four wires. The red wire doesn't to anywhere; it is terminated in a DuPont connector and is left loose in the box. The other three wires (white, black, and green) go into the module.
 
 ![What's Inside](images/teardown0376.jpg)
 

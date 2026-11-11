@@ -57,7 +57,7 @@ The black cable from the USB connector contains four wires. The red wire doesn't
 
 Here's a good look at the label on the white module. It's a Sonoff Wi-Fi Smart Switch, model BASICR2, rated for 100-240V AC, 50/60 Hz, 10 amps resistive load. It supports WiFi 802.11b/g/n at 2.4 GHz. Operating temperature range is specified as 10T40 (10 to 40 degrees C). FCC ID 2APN5BASICR2, IC 29127-BASICR2.
 
-The FCC filing includes a User Manual for the module, along with photos and other documents. FCC operates a [FCC ID lookup page](https://www.fcc.gov/oet/ea/fccid) where you can search by FCC ID and download any non-proprietary documents related to the filing.
+The FCC filing includes a rudimentary User Manual for the module, along with photos and other documents. FCC operates a [FCC ID lookup page](https://www.fcc.gov/oet/ea/fccid) where you can search by FCC ID and download any non-proprietary documents related to the filing. However, the [User Manual on the Sonoff web site](https://sonoff.tech/en-us/pages/user-manual) is better.
 
 This module is out of production, replaced by a BASIC R4 version. Nonetheless, as of this writing EZmation has this version offered for sale on their web site for just $9.49.
 

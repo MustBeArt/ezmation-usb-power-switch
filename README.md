@@ -83,3 +83,83 @@ At the lower left corner of the board the WiFi antenna is visible as a wiggly tr
 
 ![Digital Side](images/teardown0380.jpg)
 ![Serial Port and Processor](images/teardown0384.jpg)
+
+## Experimental Findings
+
+### USB Connection (AC Power Disconnected)
+When the USB connector on the power switch is plugged in to a computer, it is immediately enumerated as a serial port device, even if AC power is not yet connected to the power switch. This shows that the USB to serial adapter is in the USB connector and not in the Sonoff module. Here is what it looks like to my M4 MacBook Air:
+
+```
+FT232R USB UART:
+
+Location ID:	0x01110000
+Connection Type:	Removable
+Manufacturer:	FTDI
+Serial Number:	A5XK3RJT
+Link Speed:	12 Mb/s
+USB Vendor ID:	0x0403
+USB Product ID:	0x6001
+USB Product Version:	0x0600
+```
+
+With AC power not connected, the serial port does not send any characters, either on powerup or in response to characters sent from the computer. This is consistent with the observation that the red wire, presumably power from USB, is not connected to anything in the power switch. Power for the SOC in the Sonoff module is derived from the AC line, not from USB.
+
+### After Connecting AC Power
+
+When AC power is connected to the power switch, it is immediately passed through to the duplex outlet. This matches the documentation.
+
+On the USB serial port, we see two separate bursts of data at powerup. The first burst is at the unusual baud rate of 74880. Here's what that looks like:
+
+```
+ets Jan  8 2013,rst cause:1, boot mode:(3,0)
+
+load 0x4010f000, len 1384, room 16
+tail 8
+chksum 0x2d
+csum 0x2d
+v4ceabea9
+```
+
+This apparently has something to do with a boot loader. I found hints about this in the [FAQ for Tasmota](https://tasmota.github.io/docs/FAQ/#flashing-issues), an open source operating system for the ESP82xx. It says "If the flash fails or the device does not operate as expected, try using the default ESP82xx boot ROM baud rate - 74880. This is the baud rate the ESP82xx is set to by default when it boots into programming mode."
+
+Then it switches to the documented baud rate of 115200 and sends this signon message:
+
+```
+RS232 POWER CONTROL
+https://www.irblaster.info V0.2
+Supported Commands: ON, OFF, ?
+```
+
+If the terminal program is set for 115200 baud when the burst at 74880 baud comes through, and if it is trying to emulate a VT100 or ANSI terminal, it may be confused and display this instead:
+
+```
+RS232 POWER CONTROL
+␤├├⎻⎽://┬┬┬.␋⎼␉┌▒⎽├␊⎼.␋┼°⎺ V0.2
+S┤⎻⎻⎺⎼├␊␍ C⎺└└▒┼␍⎽: ON, OFF, ?
+```
+
+The domain name mentioned, [IR Blaster.info](https://www.irblaster.info), is identified on both web sites as a sister site to [EZmation.com](https://ezmation.com).
+
+Both of these messages are sent with CRLF line endings.
+
+### Responses to Commands
+
+Input characters are not echoed.
+
+Commands are accepted with CR, LF, or CRLF line endings.
+
+If the first command you type is invalid (including just an empty line), the power switch will respond with:
+
+```
+invalid command
+```
+
+However, once the power switch has processed a valid command, that response is no longer generated for most invalid inputs. Instead, it seems to repeat the previous valid command, or maybe it is merely repeating the *response* to the previous valid command.
+
+The `ON` and `OFF` commands (which are indeed case sensitive) generate no response.
+
+The `?` command generates a response of "ON" or "OFF", followed by CRLF.
+
+Any valid command is accepted even if it is followed by extra characters after the command but before the line ending. So `ONatime there were three little pigs` is processed the same as `ON`.
+
+However, as a special case, multiple valid commands on the same line with no characters in between (such as `ON?`, `ONON`, `ONOFF`, `??`, etc. ) still generate an `invalid command` response, and are not processed.

@@ -102,6 +102,70 @@ USB Product ID:	0x6001
 USB Product Version:	0x0600
 ```
 
+Here's how it looks to `lsusb -vvv` on an Ubuntu 22.04.5 VM:
+
+```
+Bus 003 Device 022: ID 0403:6001 Future Technology Devices International, Ltd FT232 Serial (UART) IC
+Couldn't open device, some information will be missing
+Device Descriptor:
+  bLength                18
+  bDescriptorType         1
+  bcdUSB               2.00
+  bDeviceClass            0 
+  bDeviceSubClass         0 
+  bDeviceProtocol         0 
+  bMaxPacketSize0         8
+  idVendor           0x0403 Future Technology Devices International, Ltd
+  idProduct          0x6001 FT232 Serial (UART) IC
+  bcdDevice            6.00
+  iManufacturer           1 FTDI
+  iProduct                2 FT232R USB UART
+  iSerial                 3 A5XK3RJT
+  bNumConfigurations      1
+  Configuration Descriptor:
+    bLength                 9
+    bDescriptorType         2
+    wTotalLength       0x0020
+    bNumInterfaces          1
+    bConfigurationValue     1
+    iConfiguration          0 
+    bmAttributes         0xa0
+      (Bus Powered)
+      Remote Wakeup
+    MaxPower               90mA
+    Interface Descriptor:
+      bLength                 9
+      bDescriptorType         4
+      bInterfaceNumber        0
+      bAlternateSetting       0
+      bNumEndpoints           2
+      bInterfaceClass       255 Vendor Specific Class
+      bInterfaceSubClass    255 Vendor Specific Subclass
+      bInterfaceProtocol    255 Vendor Specific Protocol
+      iInterface              2 
+      Endpoint Descriptor:
+        bLength                 7
+        bDescriptorType         5
+        bEndpointAddress     0x81  EP 1 IN
+        bmAttributes            2
+          Transfer Type            Bulk
+          Synch Type               None
+          Usage Type               Data
+        wMaxPacketSize     0x0040  1x 64 bytes
+        bInterval               0
+      Endpoint Descriptor:
+        bLength                 7
+        bDescriptorType         5
+        bEndpointAddress     0x02  EP 2 OUT
+        bmAttributes            2
+          Transfer Type            Bulk
+          Synch Type               None
+          Usage Type               Data
+        wMaxPacketSize     0x0040  1x 64 bytes
+        bInterval               0
+
+```
+
 With AC power not connected, the serial port does not send any characters, either on powerup or in response to characters sent from the computer. This is consistent with the observation that the red wire, presumably power from USB, is not connected to anything in the power switch. Power for the SOC in the Sonoff module is derived from the AC line, not from USB.
 
 ### After Connecting AC Power

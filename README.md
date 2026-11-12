@@ -59,7 +59,7 @@ Here's a good look at the label on the white module. It's a Sonoff Wi-Fi Smart S
 
 The FCC filing includes a rudimentary User Manual for the module, along with photos and other documents. FCC operates a [FCC ID lookup page](https://www.fcc.gov/oet/ea/fccid) where you can search by FCC ID and download any non-proprietary documents related to the filing. However, the [User Manual on the Sonoff web site](https://sonoff.tech/en-us/pages/user-manual) is better.
 
-This module is out of production, replaced by a BASIC R4 version. Nonetheless, as of this writing EZmation has this version offered for sale on their web site for just $9.49.
+This module is out of production, replaced by a BASIC R4 version. The BASICR4 is presently offered on Sonoff's web site for just $6.99.
 
 ![Sonoff Device](images/teardown0378.jpg)
 

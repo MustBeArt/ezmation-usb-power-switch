@@ -230,6 +230,10 @@ However, as a special case, multiple valid commands on the same line with no cha
 
 ## Example Application: Power Cycling the Attached Device
 
+This example is written in Python3 for Linux systems. It relies on the system being modern enough to support udev's automatic creation of alias device names.
+
+Tested with Python 3.10.12 on Ubuntu 22.04.5 in a VM under Unraid 7.3.1, with the USB power switch plugged into a USB hub plugged into a USB controller that's bound to the VM.
+
 ```python
 #!/usr/bin/python3
 # Use pexpect to interact with the EZmation.com USB power switch

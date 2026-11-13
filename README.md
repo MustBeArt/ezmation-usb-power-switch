@@ -230,7 +230,7 @@ However, as a special case, multiple valid commands on the same line with no cha
 
 ## Example Application: Power Cycling the Attached Device
 
-This example is written in Python3 for Linux systems. It relies on the system being modern enough to support udev's automatic creation of alias device names.
+This example is written in Python3 for Linux systems. It relies on the system being modern enough to support udev's automatic creation of alias device names. It also requires `fuser` and `screen` to be installed and in `$PATH`. It also depends on the environment variable TERM being set to `xterm-256color` or a similar ANSI/VT100 emulation.
 
 Tested with Python 3.10.12 on Ubuntu 22.04.5 in a VM under Unraid 7.3.1, with the USB power switch plugged into a USB hub plugged into a USB controller that's bound to the VM.
 
